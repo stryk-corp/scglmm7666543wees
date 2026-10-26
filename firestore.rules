@@ -1,0 +1,107 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    function hasSupportedDocumentType(data) {
+      return !data.keys().hasAny(['documentType'])
+        || data.documentType in ['siwes_report', 'term_paper', 'essay'];
+    }
+
+    function hasSupportedGenerationPaymentType(data) {
+      return !data.keys().hasAny(['generationPayment'])
+        || data.generationPayment == null
+        || (data.generationPayment is map
+          && (
+            !data.generationPayment.keys().hasAny(['documentType'])
+            || data.generationPayment.documentType in ['siwes_report', 'term_paper', 'essay']
+          ));
+    }
+
+    // Allow admin reads for password verification
+    match /admin/config {
+      allow read: if true;
+    }
+
+    match /users/{userId} {
+      // User can read/update/delete their own profile
+      allow read, delete: if request.auth != null && request.auth.uid == userId;
+      // Allow specific fields to be updated by the user
+      allow update: if request.auth != null && request.auth.uid == userId
+                    && request.resource.data.diff(resource.data).affectedKeys()
+                       .hasOnly(['fullName', 'regNumber', 'universityName', 'facultyName', 'departmentName', 'bankName', 'accountNumber', 'accountName', 'balance']);
+
+      // Admins can update referral status, counts, and balances
+      allow update: if isAdmin()
+                    && request.resource.data.diff(resource.data).affectedKeys()
+                       .hasAny(['isReferralActive', 'referralCount', 'referralBalance', 'balance', 'referralCommissionRate']);
+
+      // Allow any authenticated user to create their own user document.
+      allow create: if request.auth != null;
+      
+      // Admins can list all users
+      allow list: if isAdmin();
+
+      // Only server-side admin actions can update referral balance and count.
+      // This rule is to allow server-side increments. The client-side update for other
+      // profile fields is handled above.
+      allow write: if isAdmin();
+
+
+      match /reports/{reportId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow create, update: if request.auth != null
+          && request.auth.uid == userId
+          && hasSupportedDocumentType(request.resource.data)
+          && hasSupportedGenerationPaymentType(request.resource.data);
+        allow delete: if request.auth != null && request.auth.uid == userId;
+      }
+      
+      match /notifications/{notificationId} {
+        allow read, write, list: if request.auth != null && request.auth.uid == userId;
+      }
+
+      match /drafts/{draftId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow create, update: if request.auth != null
+          && request.auth.uid == userId
+          && hasSupportedDocumentType(request.resource.data)
+          && hasSupportedGenerationPaymentType(request.resource.data);
+        allow delete: if request.auth != null && request.auth.uid == userId;
+      }
+      
+      match /transactions/{transactionId} {
+        allow read, list, create: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    match /schoolEarnings/{schoolId} {
+        allow read: if true; // Allow anyone to read for the leaderboard
+        allow write: if request.auth != null; // Allow authenticated server actions to write
+    }
+
+    match /globalNotifications/{notificationId} {
+      allow read, list: if request.auth != null; // Allow any authenticated user to read and list
+      allow write: if isAdmin(); // Only admins can create/update/delete
+    }
+
+    // Allow admins to read all reports via collection group query
+    match /{path=**}/reports/{reportId} {
+      allow read: if isAdmin();
+    }
+    
+    match /testimonials/{testimonialId} {
+      // Anyone can read testimonials
+      allow read, list: if true;
+      // Any authenticated user can create a testimonial
+      allow create: if request.auth != null;
+      // Only admins can update or delete testimonials
+      allow update, delete: if isAdmin();
+    }
+  }
+}

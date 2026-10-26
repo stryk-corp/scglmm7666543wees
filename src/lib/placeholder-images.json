@@ -1,0 +1,46 @@
+{
+  "placeholderImages": [
+    {
+      "id": "testimonial-report-1",
+      "description": "An image showing a well-formatted SIWES report page.",
+      "imageUrl": "https://images.unsplash.com/photo-1762846700374-f4aeb2f38e92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZXBvcnQlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjQ2MDI2MDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "report document"
+    },
+    {
+      "id": "testimonial-report-2",
+      "description": "An image showing another page of a SIWES report with diagrams.",
+      "imageUrl": "https://images.unsplash.com/photo-1758876203474-4425ac96181b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWNobmljYWwlMjBkb2N1bWVudHxlbnwwfHx8fDE3NjQ2MjU0Nzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "technical document"
+    },
+    {
+      "id": "testimonial-report-3",
+      "description": "An image of a cover page for a SIWES report.",
+      "imageUrl": "https://images.unsplash.com/photo-1551300316-cc6ced5bbe27?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y292ZXIlMjBwYWdlfGVufDB8fHx8MTc2NDYyNTQ3OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cover page"
+    },
+    {
+      "id": "testimonial-report-4",
+      "description": "A close-up of a well-written chapter in a SIWES report.",
+      "imageUrl": "https://images.unsplash.com/photo-1694344632421-1ba8b9125d03?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxyZXBvcnQlMjB0ZXh0fGVufDB8fHx8MTc2NDYyNTQ3OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "report text"
+    },
+    {
+      "id": "testimonial-author-1",
+      "description": "A placeholder image for a student author.",
+      "imageUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzdHVkZW50JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzY0NTI1MTMwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "student portrait"
+    },
+    {
+      "id": "testimonial-author-2",
+      "description": "A placeholder image for a student author.",
+      "imageUrl": "https://images.unsplash.com/photo-1635131902146-6957477a4ff4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwZXJzb24lMjBzbWlsaW5nfGVufDB8fHx8MTc2NDU2OTgzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person smiling"
+    },
+    {
+      "id": "testimonial-author-3",
+      "description": "A placeholder image for a student author.",
+      "imageUrl": "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx1bml2ZXJzaXR5JTIwc3R1ZGVudHxlbnwwfHx8fDE3NjQ1OTE2Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university student"
+    }
+  ]
+}
