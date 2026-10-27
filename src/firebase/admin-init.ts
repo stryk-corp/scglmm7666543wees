@@ -1,5 +1,5 @@
 
-import { initializeApp, getApps, App, applicationDefault } from 'firebase-admin/app';
+import { initializeApp, getApps, App, applicationDefault, cert } from 'firebase-admin/app';
 import { firebaseConfig } from './config';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
@@ -11,9 +11,19 @@ function getAdminApp() {
   if (getApps().some(app => app.name === 'admin')) {
     return getApps().find(app => app.name === 'admin')!;
   }
-  
+
+  const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  const credential = clientEmail && privateKey
+    ? cert({
+        projectId: firebaseConfig.projectId,
+        clientEmail,
+        privateKey,
+      })
+    : applicationDefault();
+
   adminApp = initializeApp({
-    credential: applicationDefault(),
+    credential,
     storageBucket: firebaseConfig.storageBucket,
     projectId: firebaseConfig.projectId
   }, 'admin');

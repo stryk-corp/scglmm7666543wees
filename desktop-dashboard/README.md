@@ -15,6 +15,14 @@ through Firestore Security Rules. This is not a full admin claim and the rules e
 dashboard-reader sessions all client writes. The password is not saved; only the admin path is
 stored in `%APPDATA%\ScholarverseDashboard\settings.json`.
 
+The session endpoint runs on the production server and requires Firebase Admin SDK credentials.
+For Vercel, configure `FIREBASE_ADMIN_CLIENT_EMAIL` and `FIREBASE_ADMIN_PRIVATE_KEY` as encrypted
+server environment variables for every deployed environment. Use the service account assigned to
+the Scholarverse server, grant only the project-level permissions needed by the existing server
+actions, and store the private key in Vercel's encrypted environment settings. Do not put these
+values in the desktop app, source code, or a committed `.env` file. The Admin SDK uses these
+variables when present and falls back to Application Default Credentials on Google-managed hosts.
+
 Deploy both the Firestore rule changes in the repository's `firestore.rules` and the website API
 route before using the dashboard. Enter the same admin path used in the existing admin login URL
 (only the path segment, without slashes) and the existing admin password. Keep the app on a

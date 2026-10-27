@@ -58,6 +58,8 @@ const founderStructuredData = {
       jobTitle: 'Co-Founder and Web Developer',
       worksFor: { '@type': 'Organization', name: 'Creative Media Concept' },
       affiliation: { '@type': 'CollegeOrUniversity', name: 'University of Nigeria, Nsukka' },
+      image:
+        'https://i.ibb.co/yn1RDz0S/IMG-20261027-WA0010.jpg',
       knowsAbout: ['Frontend development', 'Website design', 'Mechanical engineering'],
       url: `${SITE_URL}/about`,
     },

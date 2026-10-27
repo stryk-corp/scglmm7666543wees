@@ -150,12 +150,19 @@ export default function AboutPage() {
 
                     <article className="overflow-hidden rounded-2xl border border-border bg-card">
                         <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-start">
-                            <div
-                                role="img"
-                                aria-label="Initials UC, portrait not provided"
-                                className="flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-3xl font-bold text-primary"
-                            >
-                                UC
+                            <div className="relative flex h-32 w-32 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-primary/10 text-3xl font-bold text-primary">
+                                <span aria-hidden="true">UC</span>
+                                <img
+                                    src="https://i.ibb.co/yn1RDz0S/IMG-20261027-WA0010.jpg"
+                                    alt="Uyanna Kingsley Chukwuebuka, co-founder of Scholarverse"
+                                    width="128"
+                                    height="128"
+                                    loading="lazy"
+                                    className="absolute inset-0 h-32 w-32 rounded-2xl object-cover"
+                                    onError={(event) => {
+                                        event.currentTarget.style.display = 'none';
+                                    }}
+                                />
                             </div>
                             <div className="min-w-0">
                                 <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-primary">Co-Founder</p>
