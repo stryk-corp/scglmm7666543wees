@@ -308,6 +308,38 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Document-specific resources */}
+        <section aria-labelledby="document-tools-heading" className="mb-28 md:mb-36">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 id="document-tools-heading" className="text-3xl sm:text-4xl font-extrabold font-headline text-foreground mb-3">
+              Choose the Right Academic Writing Tool
+            </h2>
+            <p className="text-muted-foreground text-sm sm:text-base">
+              Explore an online workflow for your term paper, SIWES or IT report, or academic essay.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Link href="/term-paper-generator-online" className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+              <h3 className="mb-2 text-lg font-bold font-headline">Generate a Term Paper Online</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Start an editable academic term paper draft with your topic, course, and assignment details.
+              </p>
+            </Link>
+            <Link href="/siwes-it-report-generator" className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+              <h3 className="mb-2 text-lg font-bold font-headline">Generate a SIWES / IT Report</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Organize your real industrial training activities and skills into a structured report draft.
+              </p>
+            </Link>
+            <Link href="/essay-generator-online" className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+              <h3 className="mb-2 text-lg font-bold font-headline">Generate an Academic Essay</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                Develop an essay prompt into a structured draft you can research, revise, and make your own.
+              </p>
+            </Link>
+          </div>
+        </section>
+
         {/* Bottom CTA Banner */}
         <section className="mb-20">
           <div className="rounded-3xl bg-gradient-to-r from-primary/15 via-emerald-500/10 to-teal-500/10 border border-primary/25 p-8 sm:p-14 text-center shadow-md relative overflow-hidden">

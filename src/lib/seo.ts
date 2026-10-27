@@ -11,7 +11,7 @@ export function createPageMetadata(title: string, description: string, path: str
     openGraph: {
       type: 'website',
       locale: 'en_NG',
-      url: path,
+      url: `${SITE_URL}${path}`,
       siteName: SITE_NAME,
       title,
       description,
