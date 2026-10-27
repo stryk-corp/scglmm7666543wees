@@ -7,7 +7,7 @@ import { useFirestore } from '@/firebase';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Medal, Trophy } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 
 interface SchoolEarning {
   id: string;
@@ -26,12 +26,12 @@ const getRankColor = (rank: number) => {
 export function UniversityLeaderboard() {
   const [earnings, setEarnings] = useState<SchoolEarning[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const firestore = useFirestore();
 
   useEffect(() => {
-    if (!firestore) return;
-    
     setLoading(true);
+    setError(null);
     const earningsRef = collection(firestore, 'schoolEarnings');
     const q = query(earningsRef, orderBy('reportCount', 'desc'), limit(10));
 
@@ -44,6 +44,7 @@ export function UniversityLeaderboard() {
       setLoading(false);
     }, (error) => {
         console.error("Error fetching school earnings: ", error);
+        setError('University activity could not be loaded. Please try again later.');
         setLoading(false);
     });
 
@@ -81,7 +82,14 @@ export function UniversityLeaderboard() {
                   <TableCell className="text-right font-semibold font-mono text-primary">{earning.reportCount}</TableCell>
                 </TableRow>
               ))}
-              {earnings.length === 0 && (
+              {error && (
+                <TableRow>
+                  <TableCell colSpan={3} role="alert" className="text-center text-destructive py-10 font-medium">
+                    {error}
+                  </TableCell>
+                </TableRow>
+              )}
+              {!error && earnings.length === 0 && (
                 <TableRow>
                     <TableCell colSpan={3} className="text-center text-muted-foreground py-10 font-medium">
                         No university reports recorded yet. Be the first to generate for your school!

@@ -18,15 +18,25 @@ export async function updateSchoolEarnings(input: { universityName: string, amou
     }
 
     const { universityName: providedUniversityName, amount } = parsedInput.data;
-    
-    let normalizedUniversityName = providedUniversityName;
+    let normalizedUniversityName = providedUniversityName.trim();
 
     try {
-        // Normalize university name using AI
-        const aiResponse = await normalizeUniversityName({ providedName: providedUniversityName });
-        normalizedUniversityName = aiResponse.officialName;
-        
+        try {
+            const aiResponse = await normalizeUniversityName({ providedName: normalizedUniversityName });
+            if (aiResponse.officialName.trim()) {
+                normalizedUniversityName = aiResponse.officialName.trim();
+            }
+        } catch (normalizationError) {
+            console.error(
+                `[updateSchoolEarnings] University name normalization failed for "${normalizedUniversityName}":`,
+                normalizationError
+            );
+        }
+
         const slug = normalizedUniversityName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        if (!slug) {
+            throw new Error('University name must contain at least one letter or number.');
+        }
         
         const { db } = await initializeAdminApp();
         const earningsRef = db.collection('schoolEarnings').doc(slug);

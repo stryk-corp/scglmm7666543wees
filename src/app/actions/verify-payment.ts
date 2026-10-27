@@ -2,7 +2,6 @@
 
 import { z } from 'zod';
 import { initializeAdminApp } from '@/firebase/admin-init';
-import { updateSchoolEarnings } from './update-earnings';
 import { Timestamp, FieldValue } from 'firebase-admin/firestore';
 
 const VerifyPaymentInputSchema = z.object({
@@ -118,11 +117,6 @@ export async function verifyPaystackTransaction(input: {
       return calculatedNewBalance;
     });
       
-    // Update school earnings (non-blocking for user response)
-    updateSchoolEarnings({ universityName, amount: paidAmount }).catch(e => {
-        console.error("Failed to update school earnings, but user balance was updated:", e);
-    });
-
     return { success: true, newBalance };
 
   } catch (error: any) {
