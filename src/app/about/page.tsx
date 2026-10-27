@@ -92,6 +92,99 @@ export default function AboutPage() {
                 </ul>
             </div>
 
+            <section aria-labelledby="founders-heading" className="space-y-6">
+                <div className="space-y-3">
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 flex-shrink-0 bg-primary/10 text-primary rounded-xl flex items-center justify-center shadow-xs">
+                            <Users size={24}/>
+                        </div>
+                        <h2 id="founders-heading" className="text-2xl font-headline font-semibold text-foreground">
+                            Meet the Founder and Co-Founder
+                        </h2>
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">
+                        Scholarverse was jointly developed by Tobenna Ike and Uyanna Kingsley Chukwuebuka.
+                        Their shared work brings together software development, web design, and frontend
+                        implementation to build a practical academic writing platform for Nigerian students.
+                    </p>
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-2">
+                    <article className="overflow-hidden rounded-2xl border border-border bg-card">
+                        <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-start">
+                            <div className="relative h-32 w-32 flex-shrink-0 overflow-hidden rounded-2xl bg-primary/10">
+                                <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-primary">
+                                    TI
+                                </span>
+                                <img
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdEWCeO-gFWZzwtlWtgd8VnnOcdgLRpD19qAK5Mxe3dw&s=10"
+                                    alt="Tobenna Ike, founder of Scholarverse"
+                                    width="128"
+                                    height="128"
+                                    loading="lazy"
+                                    className="relative h-32 w-32 rounded-2xl object-cover"
+                                    onError={(event) => {
+                                        event.currentTarget.style.display = 'none';
+                                    }}
+                                />
+                            </div>
+                            <div className="min-w-0">
+                                <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-primary">Founder</p>
+                                <h3 className="mb-3 text-xl font-bold font-headline text-foreground">Tobenna Ike</h3>
+                                <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                                    <p>
+                                        Tobenna Ike is a software developer, web designer, and author based in
+                                        Abuja, Nigeria. He is the Chief Executive Officer of Stryk Corp and
+                                        studied at the University of Nigeria, Nsukka.
+                                    </p>
+                                    <p>
+                                        As a writer, Tobenna is the author of <em>The Mourning Mother&apos;s Curse</em>.
+                                        His experience building software and websites helped shape Scholarverse,
+                                        a platform designed to make academic report preparation more manageable
+                                        for students.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article className="overflow-hidden rounded-2xl border border-border bg-card">
+                        <div className="flex flex-col gap-5 p-6 sm:flex-row sm:items-start">
+                            <div
+                                role="img"
+                                aria-label="Initials UC, portrait not provided"
+                                className="flex h-32 w-32 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-3xl font-bold text-primary"
+                            >
+                                UC
+                            </div>
+                            <div className="min-w-0">
+                                <p className="mb-1 text-sm font-semibold uppercase tracking-wide text-primary">Co-Founder</p>
+                                <h3 className="mb-3 text-xl font-bold font-headline text-foreground">
+                                    Uyanna Kingsley Chukwuebuka
+                                </h3>
+                                <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                                    <p>
+                                        Uyanna balances technology work with engineering studies at the
+                                        University of Nigeria, Nsukka, where he is pursuing a Bachelor of
+                                        Engineering in Mechanical Engineering, with the 2028 graduating class.
+                                    </p>
+                                    <p>
+                                        Alongside his studies, he works as a Web Developer at Creative Media
+                                        Concept. His frontend work includes website design, layout customization,
+                                        coding, and improving user-friendly digital experiences.
+                                    </p>
+                                    <p>
+                                        As co-founder and co-developer of Scholarverse, Uyanna contributed his
+                                        frontend and web development experience to the platform built for
+                                        Nigerian tertiary students.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
             {/* FAQ Section */}
             <div className="space-y-6">
                 <div className="flex items-center gap-4">
