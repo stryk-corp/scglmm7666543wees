@@ -12,7 +12,7 @@
  * @exports GenerateReportSectionsOutput - The output type for the generateReportSections function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 import {GenerationTokenUsageSchema} from './generation-usage';
 
@@ -62,7 +62,7 @@ const reportSectionsPrompt = ai.definePrompt({
   name: 'reportSectionsPrompt',
   input: {schema: GenerateReportSectionsInputSchema},
   output: {schema: GenerateReportSectionsOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert AI assistant for writing SIWES (Students Industrial Work Experience Scheme) reports for any academic discipline.
     Based on the data provided, generate both an Acknowledgment and an Abstract section.
     {{#if reportTitle}}

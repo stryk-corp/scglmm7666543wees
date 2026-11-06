@@ -12,7 +12,7 @@
  * @exports GenerateChapterFiveOutput - The output type for the generateChapterFive function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 import {GenerationTokenUsageSchema} from './generation-usage';
 
@@ -59,7 +59,7 @@ const chapterFivePrompt = ai.definePrompt({
   name: 'chapterFivePrompt',
   input: {schema: GenerateChapterFiveInputSchema},
   output: {schema: GenerateChapterFiveOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert AI assistant for writing academic reports and concluding sections.
     Based on the data provided, generate the content for this chapter/section.
     {{#if reportTitle}}
@@ -76,7 +76,7 @@ const chapterFivePrompt = ai.definePrompt({
     {{#if isHumanized}}
     
     ### Humanized Content Instructions:
-    The user has selected the "Humanized" option. This means you must generate a highly structured, deeply reflective, and comprehensive chapter from a first-person perspective. The output MUST be a single string containing markdown.
+    The user has selected the "Humanized" option. Generate a highly structured, deeply reflective, and comprehensive chapter from a first-person perspective. Keep the chapter content in the separate output fields specified below.
 
     **Structure and Formatting:**
     - Use '###' for main section titles (e.g., '### 5.1 Challenges Encountered and Solutions').
@@ -135,11 +135,12 @@ const chapterFivePrompt = ai.definePrompt({
     - Reference Style: {{{referenceStyle}}}
 
     **Output Instructions:**
-    1.  Generate the content for challenges for the 'challengesText' field.
-    2.  Generate the content for conclusion and recommendations for the 'conclusionText' field.
-    3.  Generate a list of 5-7 relevant academic and technical references for the 'referencesText' field. Each reference must be on a new line and formatted in the requested {{{referenceStyle}}} style.
+    Return exactly one JSON object with all three required top-level string fields:
+    - "challengesText": only Section 5.1, Challenges Encountered and Solutions.
+    - "conclusionText": Sections 5.2 Conclusion and 5.3 Recommendations. Do not put these sections in "challengesText".
+    - "referencesText": 5-7 relevant academic and technical references, each on a new line and formatted in the requested {{{referenceStyle}}} style.
+    Do not omit any field, combine fields, or add markdown fences around the JSON.
     
-    Return the final result as a single JSON object.
     `,
 });
 

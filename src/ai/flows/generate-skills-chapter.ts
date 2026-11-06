@@ -12,7 +12,7 @@
  * @exports GenerateSkillsChapterOutput - The output type for the generateSkillsChapter function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 import {GenerationTokenUsageSchema} from './generation-usage';
 
@@ -53,7 +53,7 @@ const skillsChapterPrompt = ai.definePrompt({
   name: 'skillsChapterPrompt',
   input: {schema: GenerateSkillsChapterInputSchema},
   output: {schema: GenerateSkillsChapterOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert AI assistant for writing academic reports (SIWES, Term Papers, and Essays) for any academic discipline.
     Based on the data provided, generate the content for this chapter/section.
     {{#if reportTitle}}

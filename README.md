@@ -158,8 +158,10 @@ This application is built primarily for:
 
 ### AI Layer
 - Genkit
-- Google AI / Gemini model integration
+- OpenAI model integration via Genkit
 - Prompt-driven generation flows for academic text creation
+
+Set `OPENAI_API_KEY` in the server environment. `OPENAI_MODEL` can override the default `gpt-6-luna` model ID. Confirm that model ID is available to your OpenAI account before deploying; no API key should be committed to the repository.
 
 ### Additional Libraries
 - Zod for schema validation

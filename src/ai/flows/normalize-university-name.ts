@@ -11,7 +11,7 @@
  * @exports NormalizeUniversityNameOutput - The output type for the flow.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const NormalizeUniversityNameInputSchema = z.object({
@@ -30,7 +30,7 @@ const normalizeUniversityNamePrompt = ai.definePrompt({
   name: 'normalizeUniversityNamePrompt',
   input: {schema: NormalizeUniversityNameInputSchema},
   output: {schema: NormalizeUniversityNameOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert data cleanser. Your task is to return the full, official name of a university based on the user-provided input.
     
     For example:

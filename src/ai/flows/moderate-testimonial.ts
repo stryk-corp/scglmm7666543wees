@@ -12,7 +12,7 @@
  * - ModerateTestimonialOutput - The output type for the flow.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const ModerateTestimonialInputSchema = z.object({
@@ -35,7 +35,7 @@ const moderationPrompt = ai.definePrompt({
   name: 'moderateTestimonialPrompt',
   input: {schema: ModerateTestimonialInputSchema},
   output: {schema: ModerateTestimonialOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are a content moderator for a student-focused website. Your task is to review a user-submitted testimonial.
 
     **Moderation Rules:**

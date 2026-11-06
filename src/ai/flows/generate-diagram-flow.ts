@@ -11,7 +11,7 @@
  * - GenerateDiagramOutput - The output type for the generateDiagram function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const GenerateDiagramInputSchema = z.object({
@@ -36,7 +36,7 @@ const diagramPrompt = ai.definePrompt({
   name: 'diagramPrompt',
   input: {schema: GenerateDiagramInputSchema},
   output: {schema: GenerateDiagramOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert in creating organizational charts using Mermaid.js syntax. Based on the provided list of roles, create a Mermaid flowchart that represents a standard corporate hierarchy.
 
     **Critical Instructions:**

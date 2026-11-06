@@ -11,7 +11,7 @@
  * @exports GenerateChapterFourOutput - The output type for the generateChapterFour function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 import {GenerationTokenUsageSchema} from './generation-usage';
 
@@ -58,7 +58,7 @@ const chapterFourPrompt = ai.definePrompt({
   name: 'chapterFourPrompt',
   input: {schema: GenerateChapterFourInputSchema},
   output: {schema: GenerateChapterFourOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert AI assistant for writing academic projects and technical chapters.
     Based on the user's description, generate the structured content for this section.
     {{#if reportTitle}}

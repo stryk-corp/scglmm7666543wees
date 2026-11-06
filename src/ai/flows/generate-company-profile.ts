@@ -2,7 +2,7 @@
 'use server';
 
 /**
- * @fileOverview This file defines a Genkit flow for generating a company profile with Gemini.
+ * @fileOverview This file defines a Genkit flow for generating a company profile.
  *
  * It includes:
  * - generateCompanyProfile - A function that generates a company profile.
@@ -10,7 +10,7 @@
  * - GenerateCompanyProfileOutput - The output type for the generateCompanyProfile function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const GenerateCompanyProfileInputSchema = z.object({
@@ -54,7 +54,7 @@ const generateCompanyProfileFlow = ai.defineFlow(
       name: 'generateCompanyProfileFromKnowledge',
       input: { schema: z.object({ placeOfAttachment: z.string() }) },
       output: { schema: GenerateCompanyProfileOutputSchema },
-      model: 'googleai/gemini-2.5-flash',
+      model: openAIModel,
       prompt: `You are a careful business analyst. Generate a concise profile for the company or organization "{{placeOfAttachment}}" using your existing knowledge.
 
   Do not claim to have searched the web. Do not invent facts. Include services only when you have a reasonable basis for them. Leave optional location, CEO, vision, mission, and values fields as empty strings unless you know the specific information with confidence. If you do not know this organization, provide a brief neutral profile that says its details could not be verified, and return an empty services list. Never return null or the text "null" for any field.

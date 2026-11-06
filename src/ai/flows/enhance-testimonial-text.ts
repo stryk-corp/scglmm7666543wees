@@ -12,7 +12,7 @@
  * - EnhanceTestimonialTextOutput - The output type for the flow.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const EnhanceTestimonialTextInputSchema = z.object({
@@ -33,7 +33,7 @@ const enhanceTestimonialTextPrompt = ai.definePrompt({
   name: 'enhanceTestimonialTextPrompt',
   input: {schema: EnhanceTestimonialTextInputSchema},
   output: {schema: EnhanceTestimonialTextOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert copyeditor. Your task is to enhance the following user-submitted testimonial.
 
     **Instructions:**

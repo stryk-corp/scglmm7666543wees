@@ -435,6 +435,8 @@
   .report-content-wrapper {
     padding: max(1.5in, var(--user-margin-top, 1in)) max(1.5in, var(--user-margin-right, 1in)) max(1.5in, var(--user-margin-bottom, 1in)) max(1.5in, var(--user-margin-left, 1.25in)) !important;
     margin: 0 !important;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
   [data-radix-toast-viewport],

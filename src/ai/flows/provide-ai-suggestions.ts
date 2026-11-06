@@ -11,7 +11,7 @@
  * - ProvideAISuggestionsOutput - The output type for the provideAISuggestions function.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'zod';
 import { SuggestibleFieldsSchema } from '@/lib/schema/suggestions';
 
@@ -46,7 +46,7 @@ const provideAISuggestionsPrompt = ai.definePrompt({
   name: 'provideAISuggestionsPrompt',
   input: {schema: ProvideAISuggestionsInputSchema},
   output: {schema: ProvideAISuggestionsOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert technical writer and academic assistant. Based on the user's partial SIWES report data, provide a detailed and professional suggestion for ONLY the field specified in 'fieldToSuggest'.
   
   **Field to generate suggestion for: {{{fieldToSuggest}}}**

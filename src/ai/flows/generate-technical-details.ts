@@ -11,7 +11,7 @@
  * @exports GenerateTechnicalDetailsOutput - The output type for the flow.
  */
 
-import {ai} from '@/ai/genkit';
+import {ai, openAIModel} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const GenerateTechnicalDetailsInputSchema = z.object({
@@ -38,7 +38,7 @@ const technicalDetailsPrompt = ai.definePrompt({
   name: 'technicalDetailsPrompt',
   input: {schema: GenerateTechnicalDetailsInputSchema},
   output: {schema: GenerateTechnicalDetailsOutputSchema},
-  model: 'googleai/gemini-2.5-flash',
+  model: openAIModel,
   prompt: `You are an expert career advisor and technical writer for university students across all disciplines. Based on the provided field of study, generate a realistic and cohesive set of professional details for a student's internship experience.
 
     **Field of Study:** {{{fieldOfStudy}}}
