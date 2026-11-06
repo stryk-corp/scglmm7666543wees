@@ -46,6 +46,57 @@ The executable is created at `dist\ScholarverseDashboard-ReadOnly.exe`. Open it,
 path and password, and choose **Sign in and watch**. The app connects to
 `https://scholarverse.app` and project `scholarvee`.
 
+## Build the Android viewer
+
+The Android client is a separate, read-only mobile dashboard with the same dark aurora palette.
+It uses the same dashboard sign-in endpoint and Firestore Security Rules as the Windows client.
+Passwords and Firebase session tokens are kept in memory only. The Android app does not write
+Firestore data.
+
+### Build with GitHub Actions
+
+The recommended build does not require WSL or Android tooling on your PC:
+
+1. Push the repository, including `desktop-dashboard/android/` and
+   `.github/workflows/build-android-dashboard.yml`, to GitHub.
+2. Open the repository's **Actions** tab and select **Build Android dashboard**.
+3. Choose **Run workflow** and wait for the build to complete.
+4. Open the successful run and download the
+   `ScholarverseDashboard-Android-debug` artifact. Extract the APK from the downloaded ZIP.
+
+The workflow builds on GitHub's Ubuntu runner and keeps the artifact for 14 days. It only runs
+when manually triggered.
+
+### Optional local WSL build
+
+For a local build, install WSL with an Ubuntu distribution (for example, `wsl --install -d Ubuntu`),
+then install Buildozer in a dedicated WSL virtual environment. Build prerequisites on Ubuntu include
+Python development tools, Git, Java 17, `autoconf`, `libtool`, `pkg-config`, `zlib1g-dev`,
+`libncurses-dev`, `libffi-dev`, and `libssl-dev`. For example:
+
+```bash
+sudo apt update
+sudo apt install -y python3-venv python3-dev git zip unzip openjdk-17-jdk \
+  autoconf libtool pkg-config zlib1g-dev libncurses-dev libffi-dev libssl-dev
+python3 -m venv ~/.venvs/buildozer
+~/.venvs/buildozer/bin/pip install --upgrade pip buildozer Cython
+```
+
+From Windows PowerShell, run:
+
+```powershell
+cd desktop-dashboard
+python .\build_android.py
+```
+
+The launcher stages the Android project in the WSL home directory, runs `buildozer android debug`,
+and copies the result to `dist\ScholarverseDashboard-Android-debug.apk`. The first build downloads
+the Android SDK/NDK and can take several minutes. Install the APK on an Android device to view the
+dashboard; it refreshes every 60 seconds and each collection query is capped at 5,000 documents.
+If WSL reports an installation or MSI error (for example `Wsl/CallMsi/Install/0x80070641`), finish
+repairing/updating WSL first, then rerun the launcher. The launcher checks WSL without accepting
+the interactive repair prompt.
+
 ## What is monitored
 
 - **Overview:** user count, top-up and withdrawal totals, saved report count, generation job count,
